@@ -5,14 +5,44 @@ import { useState } from 'react';
 
 function App() {
   const [intento, setIntento] = useState(0);
-  const [palabras, setPalabras] = useState(['_', '_', '_', '_', '_']);
+  const [palabras, setPalabras] = useState([
+    '_',
+    '_',
+    '_',
+    '_',
+    '_',
+    '_',
+    '_',
+    '_',
+    '_',
+    '_',
+    '_',
+  ]);
 
   function getLetter(letter) {
-    if (intento < 10) {
-      setIntento(intento + 1);
-    } else {
-      console.log('Has perdido');
+    for (let i = 0; i < SECRET_WORD.length; i++) {
+      if (SECRET_WORD[i] === letter) {
+        setPalabras((palabras) => {
+          return palabras.map((p, index) => {
+            if (index === i) {
+              return letter;
+            } else {
+              return p;
+            }
+          });
+        });
+        // setPalabras((palabras) => {
+        //   const newPalabras = [...palabras];
+        //   newPalabras[i] = letter;
+        //   return newPalabras;
+        // });
+      }
     }
+    // if (intento < 10) {
+    //   setIntento(intento + 1);
+    // } else {
+    //   console.log('Has perdido');
+    // }
   }
 
   return (
