@@ -22,6 +22,7 @@ function App() {
   function getLetter(letter) {
     for (let i = 0; i < SECRET_WORD.length; i++) {
       if (SECRET_WORD[i] === letter) {
+        //Primera forma de hacerlo tambien valida hecha por mi
         setPalabras((palabras) => {
           return palabras.map((p, index) => {
             if (index === i) {
@@ -31,6 +32,7 @@ function App() {
             }
           });
         });
+        //Segunda forma de hacerlo muy valida
         // setPalabras((palabras) => {
         //   const newPalabras = [...palabras];
         //   newPalabras[i] = letter;
