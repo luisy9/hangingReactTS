@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { letters } from './helpers/letters';
 import SECRET_WORD from './utils/SECRET_WORD';
 import Buttons from './components/Buttons';
-import { useState } from 'react';
+import Images from './components/Images';
 
 function App() {
-  const [intento, setIntento] = useState(0);
+  const [intento, setIntento] = useState(new Array(SECRET_WORD)[0].length);
   const [palabras, setPalabras] = useState([
     '_',
     '_',
@@ -19,7 +20,33 @@ function App() {
     '_',
   ]);
 
+  const [imagen, setImagen] = useState([
+    '0.png',
+    '1.png',
+    '2.png',
+    '3.png',
+    '4.png',
+    '5.png',
+    '6.png',
+    '7.png',
+    '8.png',
+    '9.png',
+  ]);
+
+  function intentosUsuario() {
+    //Refactorizar esto
+    const lengthArray = new Array(SECRET_WORD)[0].length;
+    if (intento === lengthArray) {
+      setIntento(intento - 1);
+    } else if (intento < lengthArray && intento > 0) {
+      setIntento(intento - 1);
+    } else if (intento === 0) {
+      console.log('has perdido');
+    }
+  }
+
   function getLetter(letter) {
+    intentosUsuario();
     for (let i = 0; i < SECRET_WORD.length; i++) {
       if (SECRET_WORD[i] === letter) {
         //Primera forma de hacerlo tambien valida hecha por mi
@@ -40,11 +67,6 @@ function App() {
         // });
       }
     }
-    // if (intento < 10) {
-    //   setIntento(intento + 1);
-    // } else {
-    //   console.log('Has perdido');
-    // }
   }
 
   return (
@@ -63,6 +85,10 @@ function App() {
           return <Buttons letter={letter} key={letter} getLetter={getLetter} />;
         })}
       </div>
+
+      {/* Intentos con Imagenes */}
+      <h1>hOLA</h1>
+      <Images intento={intento} imagen={imagen} />
     </div>
   );
 }
